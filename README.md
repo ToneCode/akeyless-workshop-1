@@ -1,22 +1,29 @@
-# akeyless-workshop-1
+# Overview
 Workshop 1: Deploy a Secure EKS Cluster with Terraform and Akeyless
 
+## Instructions
 
-## Zero Knowledge with Akeyless CLI
+### Fork Repo
 
-In case you are working with your own Fragment, please create an environment variable AKEYLESS_GATEWAY_URL to point your CLI to interact with the relevant Gateway e.g:
+Fork this repo so you have full control over the CI/CD pipeline.
+
+### Get AWS Credentials
+
+This is the URL to the AWS Console.
+https://047709130171.signin.aws.amazon.com/console/
+
+Participants will need to run these commands to access Akeyless to retrieve dynamic secrets for AWS.
+
+Sam to provide the `AKEYLESS_ACCESS_ID` and `AKEYLESS_ACCESS_KEY`
+
+Run the following script after filling in:
+
+
 
 ```bash
-export AKEYLESS_GATEWAY_URL=https://192.168.1.82:8080
+./start.sh
 ```
 
-## Gateway with a Self-Signed Certificate
-
-In case your Gateway using a self-signed certificate which is not trusted on your machine, set the environment variable AKEYLESS_TRUSTED_TLS_CERTIFICATE_FILE with your certificate pem file location.
-
-```bash
-export AKEYLESS_TRUSTED_TLS_CERTIFICATE_FILE=/home/sam/Development_Linux/customers/akeyless/akeyless-workshop-1/akeyless-gwy-cert.pem
-```
 
 ## Get Dynamic AWS Credentials
 

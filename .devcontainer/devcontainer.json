@@ -10,7 +10,7 @@
 	// "forwardPorts": [],
 
 	// Uncomment the next line to run commands after the container is created - for example installing curl.
-	"postCreateCommand": "/bin/bash -i -c .devcontainer/startup_script.sh",
+	// "postCreateCommand": "/bin/bash -i -c .devcontainer/startup_script.sh",
 
 	// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
 	// "mounts": [
