@@ -10,7 +10,7 @@
 	// "forwardPorts": [],
 
 	// Uncomment the next line to run commands after the container is created - for example installing curl.
-	"postCreateCommand": "echo 'https://047709130171.signin.aws.amazon.com/console/' > ~/AWS_console_URL.txt",
+	"postCreateCommand": "/bin/bash -i -c .devcontainer/startup_script.sh",
 
 	// Uncomment to use the Docker CLI from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker.
 	// "mounts": [
@@ -27,7 +27,8 @@
 		"vscode": {		
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
-				"hashicorp.terraform"
+				"hashicorp.terraform",
+                "ms-azuretools.vscode-docker"
 			]
 		}
 	}
