@@ -1,15 +1,25 @@
 # Akeyless Setup
 
-## 0. Create an Akeyless Account
+## 1. Create an Akeyless Account
 
 By going to https://akeyless.io and clicking on the Start Free button.
 
-## 1. Create a Gateway in Akeyless
+### Create an API Key
 
-Run the following command after replacing `email_address_of_your_Akeyless_account` with your Akeyless account email address:
+In the Akeyless Console, go to the `Users & Auth Methods` and click the New button. Select the `API Key` Authentication method and give it the name `AdminAPI` then click `Finish`. Make sure to save these credentials.
+![alt text](../images/create_api_key_auth.png)
+![alt text](../images/create_api_key.png)
+### Associate the Auth Method with an Access Role
+
+Click on the `Access Role` tab and click on `admin` and then click on the `Associate` button and slelect the `/AdminAPI` Auth method. This way we are giving this Auth Method full admin capabilities.
+![alt text](../images/access_role_for_auth_method_api_key.png)
+
+## 2. Create a Gateway in Akeyless
+
+### Create the Gateway
 
 ```bash
-docker run -d -p 8000:8000 -p 8200:8200 -p 18888:18888 -p 8080:8080 -p 8081:8081 -p 5696:5696 -e ADMIN_ACCESS_ID="email_address_of_your_Akeyless_account" --name akeyless-gw akeyless/base
+docker run -d -p 8000:8000 -p 8200:8200 -p 18888:18888 -p 8080:8080 -p 8081:8081 -p 5696:5696 --name akeyless-gw akeyless/base
 ```
 
 Check that the gateway is up and running
@@ -17,34 +27,114 @@ Check that the gateway is up and running
 ```bash
 docker logs -f akeyless-gateway
 ```
-Wait until the following line appears - "Gateway is up and running!" and press CTRL+C to exit log viewing mode
 
-Login to the Gateway from your browser
+### Expose the Gateway Port 8000
 
-You'll be able to configure TLS and other settings
+Click on the `PORTS` tab beside the `TERMINAL` tab and right click on port `8000` and change the `Port Visibility` to `Public`.
+![alt text](../images/port_open_gwy.png)
 
-http://<Gateway's hostname/IP>:8000
+### Give Permission
 
+Login to the Gateway from your browser by clicking on the `PORTS` tab beside the `TERMINAL` tab and click the globe icon to open in a browser for port `8000`. Login using the `Password` option and use the same password you used to log into the Akeyless Console.
+![alt text](../images/gwy_view.png)
 
+Click on `Access Permissions` then on the `New` button.
 
+Give it a name `AdminAPI` and choose the `/AdminAPI` Auth method then click `Next.` Leave `Admin` selected and then click `Finish`.
+![alt text](../images/gateway_access_permission.png)
 
-## 2. Create a Target in Akeyless
+### Check the Gateway from the Akeyless Console
 
-You will need the AWS credentials you received in the beginning to create a target in Akeyless.
+Now refresh the Akeyless Console browser and click on the `Gateway` tab to see your gateway registered with the console.
+![alt text](../images/console_view_with_gwy.png)
 
+## 3. Log into the Akeyless CLI
 
-## 3. Create an AWS Dynamic Secret
+### Update the Default Akeyless Profile
 
+Fill in the API Key values below and run the commands:
 
+```bash
+export AKEYLESS_ACCESS_ID=
+export AKEYLESS_ACCESS_KEY=
+akeyless configure --profile default --access-id ${AKEYLESS_ACCESS_ID} --access-key ${AKEYLESS_ACCESS_KEY}
+```
+
+### Test the Credentials with the CLI
+
+Run the following command to test the CLI access to Akeyless
+
+```bash
+akeyless list-gateways
+```
+
+Sample output:
+```json
+{
+  "clusters": [
+    {
+      "id": 50053,
+      "cluster_name": "acc-me6ozktdv0Tm/p-4vou9psc6dyxem/defaultCluster",
+      "cluster_url": "https://curly-halibut-vg5g75v9jj4h4gw-8000.app.github.dev",
+      "status": "Running",
+      "status_description": "",
+      "display_name": "",
+      "allowed": false,
+      "default_protection_key_id": 0,
+      "default_secret_location": "",
+      "allowed_access_ids": [
+        "p-4vou9psc6dyxem"
+      ]
+    }
+  ]
+}
+```
+
+## 4. Create a Target in Akeyless
+
+You will need the AWS credentials you received in the beginning to create a target in Akeyless. You can find them by running:
+
+```bash
+cat ~/.aws/credentials
+```
+
+Then run the command below with your AWS credentials replacing the placeholders.
+```bash
+akeyless create-aws-target --name AWS --access-key-id <aws_access_key_id> --access-key <aws_secret_access_key> --region us-east-1
+```
+
+Example:
+```bash
+akeyless create-aws-target --name AWS --access-key-id AKIAQWXXXXXX --access-key duG1kRDPXXXX --region us-east-1
+```
+
+Go to the Akeyless Console and check the newly created Target that we will use to create an AWS dynamic secret. Go to the `Targets` tab.
+![alt text](../images/targets.png)
+
+## 5. Create an AWS Dynamic Secret
+
+Now it's time to create our AWS Dynamic Secret. You will need to update the command below with your `gateway-url`. You can find it by going into your Akeyless Console and click on `Gateways` and it's under `Gateway URL (Configuration):`
+
+![alt text](../images/gateway_url.png)
 
 ```bash
 akeyless dynamic-secret create aws \
 --name /Terraform/terraform-credentials \
---target-name <Target Name> \
+--target-name AWS \
 --gateway-url 'https://<Your-Akeyless-GW-URL:8000>' \
 --aws-access-mode iam_user \
---aws-user-policies <Policy ARN> \
---aws-user-groups <UserGroup name> 
+--aws-user-groups Akeyless-Workshops
+```
+
+Example:
+
+```bash
+akeyless dynamic-secret create aws \
+--name /Terraform/terraform-credentials \
+--target-name AWS \
+--gateway-url 'https://curly-halibut-vg5g75v9jj4h4gw-8000.app.github.dev' \
+--aws-access-mode iam_user \
+--aws-user-groups Akeyless-Workshops
 ```
 
 Now test this by fetching a dynamic AWS secret value using this command:
