@@ -1,7 +1,29 @@
 # Akeyless Setup
 
+## 0. Create an Akeyless Account
+
+By going to https://akeyless.io and clicking on the Start Free button.
+
 ## 1. Create a Gateway in Akeyless
 
+Run the following command
+
+```bash
+docker run -d -p 8000:8000 -p 8200:8200 -p 18888:18888 -p 8080:8080 -p 8081:8081 -p 5696:5696 --name akeyless-gateway akeyless/base:latest-akeyless
+```
+
+Check that gateway is up and running
+
+```bash
+docker logs -f akeyless-gateway
+```
+Wait until the following line appears - "Gateway is up and running!" and press CTRL+C to exit log viewing mode
+
+Login to the Gateway from your browser
+
+You'll be able to configure TLS and other settings
+
+http://<Gateway's hostname/IP>:8000
 
 
 
