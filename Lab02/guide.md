@@ -6,13 +6,13 @@ By going to https://akeyless.io and clicking on the Start Free button.
 
 ## 1. Create a Gateway in Akeyless
 
-Run the following command
+Run the following command after replacing `email_address_of_your_Akeyless_account` with your Akeyless account email address:
 
 ```bash
-docker run -d -p 8000:8000 -p 8200:8200 -p 18888:18888 -p 8080:8080 -p 8081:8081 -p 5696:5696 --name akeyless-gateway akeyless/base:latest-akeyless
+docker run -d -p 8000:8000 -p 8200:8200 -p 18888:18888 -p 8080:8080 -p 8081:8081 -p 5696:5696 -e ADMIN_ACCESS_ID="email_address_of_your_Akeyless_account" --name akeyless-gw akeyless/base
 ```
 
-Check that gateway is up and running
+Check that the gateway is up and running
 
 ```bash
 docker logs -f akeyless-gateway
