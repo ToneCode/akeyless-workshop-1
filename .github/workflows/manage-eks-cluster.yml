@@ -24,7 +24,7 @@ jobs:
           access-id: p-tgpcvx4mdbhrom ## Replace with your Access ID associated with your GitHub JWT Auth method
           access-type: jwt
           dynamic-secrets: |
-            - name: "/Terraform/terraform-credentials"
+            - name: "/Clouds/Workshops/AWS_Lab0"
               output-name: "aws_dynamic_secret"
         
       # ********* KEY TAKEAWAY  ********* #
