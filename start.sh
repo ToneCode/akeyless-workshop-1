@@ -16,7 +16,7 @@ akeyless --init
 akeyless configure --profile initial --access-id ${AKEYLESS_ACCESS_ID} --access-key ${AKEYLESS_ACCESS_KEY}
 
 # Get the AWS credentials from Akeyless and store in a temporary file
-akeyless dynamic-secret get-value -n /Clouds/Workshops/AWS_Lab0 > /tmp/aws-credentials
+akeyless dynamic-secret get-value -n /Clouds/Workshops/AWS_Lab0 --profile initial > /tmp/aws-credentials
 
 # Print the credentials to the screen
 echo "Retrieved AWS Credentials:"
