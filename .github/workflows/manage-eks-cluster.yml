@@ -54,6 +54,13 @@ jobs:
       #   with:
       #     cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
+        # Setup AWS CLI
+      - name: Configure AWS Credentials
+        run: |
+          env | grep -i aws
+          aws configure set aws_access_key_id ${{ env.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ env.AWS_SECRET_ACCESS_KEY }}
+
       - name: Terraform Init
         run: terraform init
 
