@@ -15,7 +15,6 @@ jobs:
       run:
         shell: bash
         working-directory: ./terraform
-
     steps:
       - name: Fetch dynamic secrets from Akeyless
         id: fetch-dynamic-secrets
