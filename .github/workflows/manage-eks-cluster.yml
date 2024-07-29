@@ -19,15 +19,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        
+
       - name: Fetch dynamic secrets from Akeyless
         id: fetch-dynamic-secrets
         uses: akeyless-community/akeyless-github-action@v1.1.1
         with:
-          access-id: p-tgpcvx4mdbhrom ## Replace with your Access ID associated with your GitHub JWT Auth method
+          access-id: ${{ vars.AKEYLESS_ACCESS_ID }}
           access-type: jwt
           dynamic-secrets: |
-            - name: "/Clouds/Workshops/AWS_Lab0"
+            - name: "/Terraform/terraform-credentials"
               output-name: "aws_dynamic_secret"
         
       # ********* KEY TAKEAWAY  ********* #

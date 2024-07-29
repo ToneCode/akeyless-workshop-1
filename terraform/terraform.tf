@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket         = "tekanaid-terraform-state"
-    key            = "mainstate/terraform.tfstate"
+    key            = "workshop1/terraform.tfstate"
     region         = "us-east-1"
     encrypt        = true
     kms_key_id     = "alias/terraform-bucket-key"

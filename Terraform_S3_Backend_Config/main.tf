@@ -1,12 +1,12 @@
 terraform {
-  # backend "s3" {
-  #   bucket         = "tekanaid-terraform-state"
-  #   key            = "mainstate/terraform.tfstate"
-  #   region         = "us-east-1"
-  #   encrypt        = true
-  #   kms_key_id     = "alias/terraform-bucket-key"
-  #   dynamodb_table = "terraform-state"
-  # }
+  backend "s3" {
+    bucket         = "tekanaid-terraform-state"
+    key            = "mainstate/terraform.tfstate"
+    region         = "us-east-1"
+    encrypt        = true
+    kms_key_id     = "alias/terraform-bucket-key"
+    dynamodb_table = "terraform-state"
+  }
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -51,10 +51,6 @@ resource "aws_s3_bucket_versioning" "terraform-state-versioning" {
   }
 }
 
-resource "aws_s3_bucket_acl" "terraform-state-acl" {
-  bucket = aws_s3_bucket.terraform-state.id
-  acl    = "private"
-}
 
 resource "aws_s3_bucket_public_access_block" "block" {
   bucket = aws_s3_bucket.terraform-state.id
