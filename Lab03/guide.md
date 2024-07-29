@@ -71,5 +71,67 @@ Go to the Actions tab, select the `Manage EKS Cluster` workflow and click the dr
 ![alt text](../images/run_workflow.png)
 
 
+## 8. Check the AWS Console [Optional]
+
+If you wish, you could log into the AWS console and see your EKS cluster there. Below is a snapshot of what you would see.
+
+![alt text](../images/cluster_created.png)
+
+## 9. Access the Cluster
+
+To get the kubeconfig for the cluster, run the command below:
+
+```bash
+aws eks update-kubeconfig --region us-east-1 --name $(terraform output -json | jq -r .cluster_name.value)
+```
+
+You can now use `kubectl` to access the cluster.
+
+Below are some suggested commands for you to run.
+
+```bash
+@tekanaid ➜ /workspaces/akeyless-workshop-1/terraform (main) $ kubens
+default
+kube-node-lease
+kube-public
+kube-system
+@tekanaid ➜ /workspaces/akeyless-workshop-1/terraform (main) $ kubens kube-system
+Context "arn:aws:eks:us-east-1:047709130171:cluster/workshop-1-AYEsefOJ" modified.
+Active namespace is "kube-system".
+@tekanaid ➜ /workspaces/akeyless-workshop-1/terraform (main) $ kga
+NAME                                      READY   STATUS    RESTARTS   AGE
+pod/aws-node-p9sc2                        2/2     Running   0          21m
+pod/aws-node-pd6f6                        2/2     Running   0          21m
+pod/aws-node-tltng                        2/2     Running   0          21m
+pod/coredns-54d6f577c6-s6xfm              1/1     Running   0          44m
+pod/coredns-54d6f577c6-x29rp              1/1     Running   0          44m
+pod/ebs-csi-controller-7bb6f55486-25kx2   6/6     Running   0          22m
+pod/ebs-csi-controller-7bb6f55486-g85fd   6/6     Running   0          22m
+pod/ebs-csi-node-942jx                    3/3     Running   0          21m
+pod/ebs-csi-node-vlvf6                    3/3     Running   0          21m
+pod/ebs-csi-node-wsqlk                    3/3     Running   0          21m
+pod/kube-proxy-brcvz                      1/1     Running   0          21m
+pod/kube-proxy-qtdn5                      1/1     Running   0          21m
+pod/kube-proxy-twhjb                      1/1     Running   0          21m
+
+NAME               TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)                  AGE
+service/kube-dns   ClusterIP   172.20.0.10   <none>        53/UDP,53/TCP,9153/TCP   44m
+
+NAME                                  DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR              AGE
+daemonset.apps/aws-node               3         3         3       3            3           <none>                     44m
+daemonset.apps/ebs-csi-node           3         3         3       3            3           kubernetes.io/os=linux     22m
+daemonset.apps/ebs-csi-node-windows   0         0         0       0            0           kubernetes.io/os=windows   22m
+daemonset.apps/kube-proxy             3         3         3       3            3           <none>                     44m
+
+NAME                                 READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/coredns              2/2     2            2           44m
+deployment.apps/ebs-csi-controller   2/2     2            2           22m
+
+NAME                                            DESIRED   CURRENT   READY   AGE
+replicaset.apps/coredns-54d6f577c6              2         2         2       44m
+replicaset.apps/ebs-csi-controller-7bb6f55486   2         2         2       22m
+```
+
+### Congratulations on building your EKS cluster with Terraform and Akeyless!
 
 > You've reached the end of the lab.
