@@ -15,7 +15,11 @@ jobs:
       run:
         shell: bash
         working-directory: ./terraform
+
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        
       - name: Fetch dynamic secrets from Akeyless
         id: fetch-dynamic-secrets
         uses: akeyless-community/akeyless-github-action@v1.1.1
@@ -43,10 +47,6 @@ jobs:
           echo "type: ${{ env.AWS_TYPE }}" >> secrets.txt
           echo "user: ${{ env.AWS_USER }}" >> secrets.txt
           cat secrets.txt
-
-        
-      - name: Checkout code
-        uses: actions/checkout@v2
 
       # - name: Setup Terraform
       #   uses: hashicorp/setup-terraform@v1
