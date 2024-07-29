@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket         = "tekanaid-terraform-state"
+    bucket         = "tekanaid-terraform-state-workshop"
     key            = "workshop1/terraform.tfstate"
     region         = "us-east-1"
     encrypt        = true

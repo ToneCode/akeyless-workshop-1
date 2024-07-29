@@ -25,9 +25,11 @@ You can store the Access ID as a GitHub variable inside the repository to use in
 In the following examples, instead of explicitly specifying the Access ID of the Authentication Method inside the workflow, we store it as a variable in the repository called `AKEYLESS_ACCESS_ID`.
 
 On GitHub, navigate to the main page of the repository, and select Settings > Secrets and variables > Actions > Variables tab > New repository variable.
-Enter the name for the variable (for example, `AKEYLESS_ACCESS_ID` ) and set the value to your Auth Method Access ID.
+Enter the name for the variable as `AKEYLESS_ACCESS_ID` and set the value to your Auth Method Access ID.
 
 Select Add Variable.
+
+![alt text](../images/repo_variable.png)
 
 ## 3. Create an Access Role
 
@@ -55,6 +57,19 @@ akeyless set-role-rule --role-name GitHubRoleWorkshop \
 --capability read
 ```
 
-## 6. 
+## 6. Enable Workflows in your Repo
+
+Since you've forked this repo, you need to enable the GitHub Actions workflows. Go to the Actions tab and click the button `I understand my workflows, go ahead and enable them`.
+
+![alt text](../images/enable_workflows.png)
+
+
+## 7. Run the GitHub Actions Workflow
+
+Go to the Actions tab, select the `Manage EKS Cluster` workflow and click the drop down button `Run workflow` and then click the button `Run workflow`.
+
+![alt text](../images/run_workflow.png)
+
+
 
 > You've reached the end of the lab.

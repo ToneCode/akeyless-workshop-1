@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket         = "tekanaid-terraform-state"
+    bucket         = "tekanaid-terraform-state-workshop"
     key            = "mainstate/terraform.tfstate"
     region         = "us-east-1"
     encrypt        = true
@@ -31,7 +31,7 @@ resource "aws_kms_alias" "key-alias" {
 }
 
 resource "aws_s3_bucket" "terraform-state" {
-  bucket = "tekanaid-terraform-state"
+  bucket = "tekanaid-terraform-state-workshop"
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "terraform-state-encryption" {
