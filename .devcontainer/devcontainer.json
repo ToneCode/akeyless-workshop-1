@@ -33,7 +33,8 @@
 			"extensions": [
 				"hashicorp.terraform",
                 "ms-azuretools.vscode-docker",
-                "ms-kubernetes-tools.vscode-kubernetes-tools"
+                "ms-kubernetes-tools.vscode-kubernetes-tools",
+				"yzhang.markdown-all-in-one"
 			]
 		}
 	}

@@ -40,6 +40,6 @@ Finally, use the URL below to access the AWS Console:
 https://047709130171.signin.aws.amazon.com/console/
 ```
 
-your IAM user name is the same as the "id" above and your Password is the "password" above.
+your IAM user name is the same as the "user" above and your Password is the "password" above.
 
 > You've reached the end of the lab.

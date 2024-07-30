@@ -1,22 +1,43 @@
 # Akeyless Setup
 
+- [Akeyless Setup](#akeyless-setup)
+  - [1. Create an Akeyless Account](#1-create-an-akeyless-account)
+    - [1.1 Create an API Key](#11-create-an-api-key)
+    - [1.2 Associate the Auth Method with an Access Role](#12-associate-the-auth-method-with-an-access-role)
+  - [2. Create a Gateway in Akeyless](#2-create-a-gateway-in-akeyless)
+    - [2.1 Create the Gateway](#21-create-the-gateway)
+    - [2.2 Expose the Gateway Port 8000](#22-expose-the-gateway-port-8000)
+    - [2.3 Give Permission](#23-give-permission)
+    - [2.4 Check the Gateway from the Akeyless Console](#24-check-the-gateway-from-the-akeyless-console)
+  - [3. Log into the Akeyless CLI](#3-log-into-the-akeyless-cli)
+    - [Update the Default Akeyless Profile](#update-the-default-akeyless-profile)
+    - [3.1 Test the Credentials with the CLI](#31-test-the-credentials-with-the-cli)
+  - [4. Create a Target in Akeyless](#4-create-a-target-in-akeyless)
+  - [5. Create an AWS Dynamic Secret](#5-create-an-aws-dynamic-secret)
+
+
 ## 1. Create an Akeyless Account
 
 By going to https://akeyless.io and clicking on the Start Free button.
 
-### Create an API Key
+### 1.1 Create an API Key
 
 In the Akeyless Console, go to the `Users & Auth Methods` and click the New button. Select the `API Key` Authentication method and give it the name `AdminAPI` then click `Finish`. Make sure to save these credentials.
-![alt text](../images/create_api_key_auth.png)
+
 ![alt text](../images/create_api_key.png)
-### Associate the Auth Method with an Access Role
+
+![alt text](../images/create_api_key_auth.png)
+
+Now save the `Access ID` and `Access Key` to be used later.
+
+### 1.2 Associate the Auth Method with an Access Role
 
 Click on the `Access Role` tab and click on `admin` and then click on the `Associate` button and slelect the `/AdminAPI` Auth method. This way we are giving this Auth Method full admin capabilities.
 ![alt text](../images/access_role_for_auth_method_api_key.png)
 
 ## 2. Create a Gateway in Akeyless
 
-### Create the Gateway
+### 2.1 Create the Gateway
 
 ```bash
 docker run -d -p 8000:8000 -p 8200:8200 -p 18888:18888 -p 8080:8080 -p 8081:8081 -p 5696:5696 --name akeyless-gw akeyless/base
@@ -25,17 +46,26 @@ docker run -d -p 8000:8000 -p 8200:8200 -p 18888:18888 -p 8080:8080 -p 8081:8081
 Check that the gateway is up and running
 
 ```bash
-docker logs -f akeyless-gateway
+docker logs -f akeyless-gw
 ```
 
-### Expose the Gateway Port 8000
+### 2.2 Expose the Gateway Port 8000
 
 Click on the `PORTS` tab beside the `TERMINAL` tab and right click on port `8000` and change the `Port Visibility` to `Public`.
+![alt text](../images/port_visibility_public.png)
+
+### 2.3 Give Permission
+
+Login to the Gateway from your browser by clicking on the `PORTS` tab beside the `TERMINAL` tab and click the globe icon to open in a browser for port `8000`. 
 ![alt text](../images/port_open_gwy.png)
 
-### Give Permission
+Approve the access to this port.
+![alt text](../images/approve_port_access.png)
 
-Login to the Gateway from your browser by clicking on the `PORTS` tab beside the `TERMINAL` tab and click the globe icon to open in a browser for port `8000`. Login using the `Password` option and use the same password you used to log into the Akeyless Console.
+Login using the `Password` option 
+![alt text](../images/change_to_password_for_gw.png)
+
+Use the same password you used to log into the Akeyless Console.
 ![alt text](../images/gwy_view.png)
 
 Click on `Access Permissions` then on the `New` button.
@@ -43,7 +73,7 @@ Click on `Access Permissions` then on the `New` button.
 Give it a name `AdminAPI` and choose the `/AdminAPI` Auth method then click `Next.` Leave `Admin` selected and then click `Finish`.
 ![alt text](../images/gateway_access_permission.png)
 
-### Check the Gateway from the Akeyless Console
+### 2.4 Check the Gateway from the Akeyless Console
 
 Now refresh the Akeyless Console browser and click on the `Gateway` tab to see your gateway registered with the console.
 ![alt text](../images/console_view_with_gwy.png)
@@ -52,7 +82,7 @@ Now refresh the Akeyless Console browser and click on the `Gateway` tab to see y
 
 ### Update the Default Akeyless Profile
 
-Fill in the API Key values below and run the commands:
+Fill in the API Key values obtained from step 1.1 below and run the commands:
 
 ```bash
 export AKEYLESS_ACCESS_ID=
@@ -60,7 +90,7 @@ export AKEYLESS_ACCESS_KEY=
 akeyless configure --profile default --access-id ${AKEYLESS_ACCESS_ID} --access-key ${AKEYLESS_ACCESS_KEY}
 ```
 
-### Test the Credentials with the CLI
+### 3.1 Test the Credentials with the CLI
 
 Run the following command to test the CLI access to Akeyless
 
