@@ -2,6 +2,27 @@
 
 In this lab we will get our pipeline ready and make sure we have the Akeyless plugin for GitHub Actions set up to retrieve the AWS Dynamic secret from the previous lab. This allows Terraform to use these AWS credentials to provision our EKS cluster in AWS.
 
+
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+
+<!-- code_chunk_output -->
+
+- [Prepare the GitHub Actions Pipeline](#prepare-the-github-actions-pipeline)
+  - [1. Create an OAuth2.0/JWT Authentication Method for GitHub](#1-create-an-oauth20jwt-authentication-method-for-github)
+  - [2. Add the Access ID as a GitHub Repository Variable](#2-add-the-access-id-as-a-github-repository-variable)
+  - [3. Create an Access Role](#3-create-an-access-role)
+  - [4. Associate the Authentication Method with an Access Role](#4-associate-the-authentication-method-with-an-access-role)
+  - [5. Set Read permissions for our AWS Dynamic Secret for the Access Role](#5-set-read-permissions-for-our-aws-dynamic-secret-for-the-access-role)
+  - [6. Enable Workflows in your Repo](#6-enable-workflows-in-your-repo)
+  - [7. Run the GitHub Actions Workflow](#7-run-the-github-actions-workflow)
+  - [8. Check the AWS Console [Optional]](#8-check-the-aws-console-optional)
+  - [9. Access the Cluster](#9-access-the-cluster)
+    - [Congratulations on building your EKS cluster with Terraform and Akeyless!](#congratulations-on-building-your-eks-cluster-with-terraform-and-akeyless)
+
+<!-- /code_chunk_output -->
+
+
+
 ## 1. Create an OAuth2.0/JWT Authentication Method for GitHub
 
 We need to create an authentication method in Akeyless for GitHub. This is a way for GitHub to authenticate to Akeyless and retrieve the AWS credentials. We will use the JWT method so we don't have to hard-code API keys for Akeyless in GitHub. This is an elegant solution to solve the secret zero problem which is the first secret needed to retreive all other secrets.
@@ -66,7 +87,7 @@ Since you've forked this repo, you need to enable the GitHub Actions workflows. 
 
 ## 7. Run the GitHub Actions Workflow
 
-Go to the Actions tab, select the `Manage EKS Cluster` workflow and click the drop down button `Run workflow` and then click the button `Run workflow`.
+Go to the Actions tab, select the `Manage EKS Cluster` workflow and click the drop down button `Run workflow`, make sure the `action` selected is `apply` and then click the button `Run workflow`.
 
 ![alt text](../images/run_workflow.png)
 

@@ -60,22 +60,27 @@ Login to the Gateway from your browser by clicking on the `PORTS` tab beside the
 ![alt text](../images/port_open_gwy.png)
 
 Approve the access to this port.
+
 ![alt text](../images/approve_port_access.png)
 
 Login using the `Password` option 
+
 ![alt text](../images/change_to_password_for_gw.png)
 
 Use the same password you used to log into the Akeyless Console.
+
 ![alt text](../images/gwy_view.png)
 
 Click on `Access Permissions` then on the `New` button.
 
 Give it a name `AdminAPI` and choose the `/AdminAPI` Auth method then click `Next.` Leave `Admin` selected and then click `Finish`.
+
 ![alt text](../images/gateway_access_permission.png)
 
 ### 2.4 Check the Gateway from the Akeyless Console
 
 Now refresh the Akeyless Console browser and click on the `Gateway` tab to see your gateway registered with the console.
+
 ![alt text](../images/console_view_with_gwy.png)
 
 ## 3. Log into the Akeyless CLI

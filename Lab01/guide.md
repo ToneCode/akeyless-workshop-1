@@ -1,5 +1,19 @@
 # Environment Setup
 
+
+<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
+
+<!-- code_chunk_output -->
+
+- [Environment Setup](#environment-setup)
+  - [1. Fork GitHub Repo](#1-fork-github-repo)
+  - [2. Start a Codespace](#2-start-a-codespace)
+  - [3. Get AWS Access](#3-get-aws-access)
+
+<!-- /code_chunk_output -->
+
+
+
 ## 1. Fork GitHub Repo
 
 Go to this repo and fork it to your own GitHub account so you have full control over the CI/CD pipeline.
