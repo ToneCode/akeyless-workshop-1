@@ -67,6 +67,7 @@ jobs:
           echo "key = \"workshop1-${SUFFIX}/terraform.tfstate\"" > backend.hcl
           echo "Generated suffix: ${SUFFIX}"
           echo "SUFFIX=${SUFFIX}" >> $GITHUB_ENV  # Export SUFFIX to the environment
+          sleep 30 # Wait for AWS to assign IAM permissions to the credentials
 
       - name: Terraform Init
         run: terraform init -backend-config=backend.hcl
