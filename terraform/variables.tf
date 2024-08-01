@@ -7,7 +7,6 @@ variable "region" {
 variable "cluster_name" {
   description = "Name of the EKS cluster"
   type        = string
-  default     = ""
 }
 
 variable "cluster_version" {
@@ -16,6 +15,6 @@ variable "cluster_version" {
   default     = "1.29"
 }
 
-locals {
-  cluster_name = var.cluster_name == "" ? "workshop-1-${random_string.suffix.result}" : var.cluster_name
-}
+# locals {
+#   cluster_name = var.cluster_name == "" ? "workshop-1-${random_string.suffix.result}" : var.cluster_name
+# }
