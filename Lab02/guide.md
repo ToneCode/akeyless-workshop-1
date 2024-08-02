@@ -167,6 +167,10 @@ Check the UI to see the configuration there.
 
 ![alt text](../images/target-rotated.png)
 
+You could also manually rotate the credentials as shown below.
+
+![alt text](../images/manual-rotate-target-creds.png)
+
 ## 6. Create an AWS Dynamic Secret
 
 Now it's time to create our AWS Dynamic Secret. You will need to update the command below with your `gateway-url`. You can find it by going into your Akeyless Console and click on `Gateways` and it's under `Gateway URL (Configuration):`
