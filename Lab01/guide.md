@@ -26,7 +26,7 @@ Start a GitHub Codespace on your forked repo.
 
 > Note that this section is only if you are subscribed to the TeKanAid Premium subscription as we will provide you with AWS credentials. If you are not subscribed to TeKanAid Premium, you can skip this step and use your own AWS credentials for your own AWS account.
 
-Instructor to provide the `AKEYLESS_ACCESS_ID` and `AKEYLESS_ACCESS_KEY` credentials
+If you are working on this workshop live then ask your instructor to provide the `AKEYLESS_ACCESS_ID` and `AKEYLESS_ACCESS_KEY` credentials. If you are working on this workshop on your own and you are a premium subscriber then get your Akeyless creds from the TeKanAid lesson text in `Lab01-Environment Setup`.
 
 Add these credentials in the `start.sh` script at the top then run the script:
 
