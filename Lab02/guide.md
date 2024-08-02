@@ -13,7 +13,8 @@
     - [Update the Default Akeyless Profile](#update-the-default-akeyless-profile)
     - [3.1 Test the Credentials with the CLI](#31-test-the-credentials-with-the-cli)
   - [4. Create a Target in Akeyless](#4-create-a-target-in-akeyless)
-  - [5. Create an AWS Dynamic Secret](#5-create-an-aws-dynamic-secret)
+  - [5. Create a Rotated Secret for the Target](#5-create-a-rotated-secret-for-the-target)
+  - [6. Create an AWS Dynamic Secret](#6-create-an-aws-dynamic-secret)
 
 
 ## 1. Create an Akeyless Account
@@ -146,7 +147,27 @@ akeyless create-aws-target --name AWS --access-key-id AKIAQWXXXXXX --access-key 
 Go to the Akeyless Console and check the newly created Target that we will use to create an AWS dynamic secret. Go to the `Targets` tab.
 ![alt text](../images/targets.png)
 
-## 5. Create an AWS Dynamic Secret
+## 5. Create a Rotated Secret for the Target
+
+Since we always say not to have any long-lived credentials. Let's create a rotated secret that will rotate our Target's AWS credentials automatically every 30 days.
+
+Run the following command:
+
+```bash
+akeyless rotated-secret create aws \
+--name /Terraform/aws-target-rotated \
+--target-name /AWS \
+--rotator-type target \
+--auto-rotate true \
+--rotation-interval 30 \
+--rotation-hour 10
+```
+
+Check the UI to see the configuration there.
+
+![alt text](../images/target-rotated.png)
+
+## 6. Create an AWS Dynamic Secret
 
 Now it's time to create our AWS Dynamic Secret. You will need to update the command below with your `gateway-url`. You can find it by going into your Akeyless Console and click on `Gateways` and it's under `Gateway URL (Configuration):`
 

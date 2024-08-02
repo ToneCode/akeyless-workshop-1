@@ -24,6 +24,8 @@ Start a GitHub Codespace on your forked repo.
 
 ## 3. Get AWS Access
 
+> Note that this section is only if you are subscribed to the TeKanAid Premium subscription as we will provide you with AWS credentials. If you are not subscribed to TeKanAid Premium, you can skip this step and use your own AWS credentials for your own AWS account.
+
 Instructor to provide the `AKEYLESS_ACCESS_ID` and `AKEYLESS_ACCESS_KEY` credentials
 
 Add these credentials in the `start.sh` script at the top then run the script:
