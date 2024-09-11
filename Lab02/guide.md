@@ -78,6 +78,10 @@ Give it a name `AdminAPI` and choose the `/AdminAPI` Auth method then click `Nex
 
 ![alt text](../images/gateway_access_permission.png)
 
+Add another permission for the `/admin` authentication method:
+
+![alt text](../images/more_admin_permissions_for_gateway.png)
+
 ### 2.4 Check the Gateway from the Akeyless Console
 
 Now refresh the Akeyless Console browser and click on the `Gateway` tab to see your gateway registered with the console.
