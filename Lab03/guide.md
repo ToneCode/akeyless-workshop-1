@@ -15,7 +15,7 @@ In this lab we will get our pipeline ready and make sure we have the Akeyless pl
   - [5. Set Read permissions for our AWS Dynamic Secret for the Access Role](#5-set-read-permissions-for-our-aws-dynamic-secret-for-the-access-role)
   - [6. Enable Workflows in your Repo](#6-enable-workflows-in-your-repo)
   - [7. Run the GitHub Actions Workflow](#7-run-the-github-actions-workflow)
-  - [8. Check the AWS Console [Optional]](#8-check-the-aws-console-optional)
+  - [8. Check the AWS Console \[Optional\]](#8-check-the-aws-console-optional)
   - [9. Access the Cluster](#9-access-the-cluster)
     - [Congratulations on building your EKS cluster with Terraform and Akeyless!](#congratulations-on-building-your-eks-cluster-with-terraform-and-akeyless)
 
@@ -91,7 +91,6 @@ Go to the Actions tab, select the `Manage EKS Cluster` workflow and click the dr
 
 ![alt text](../images/run_workflow.png)
 
-
 ## 8. Check the AWS Console [Optional]
 
 If you wish, you could log into the AWS console and see your EKS cluster there. Below is a snapshot of what you would see.
@@ -100,11 +99,13 @@ If you wish, you could log into the AWS console and see your EKS cluster there. 
 
 ## 9. Access the Cluster
 
-To get the kubeconfig for the cluster, run the command below:
+To get the kubeconfig for the cluster, run the command below replacing <your-eks-cluster-name> with your eks cluster name which will show up in the output of terraform or you can see in the AWS console.
 
 ```bash
-aws eks update-kubeconfig --region us-east-1 --name $(terraform output -json | jq -r .cluster_name.value)
+aws eks update-kubeconfig --region us-east-1 --name <your-eks-cluster-name>
 ```
+
+> Note: If after you run the pipeline and find that you get an error accessing the cluster, it could be that you need to refresh the AWS credentials you're using, that is if you are using the ones provided by TeKanAid Academy. You can refresh them by running the command: `/.start.sh` again.
 
 You can now use `kubectl` to access the cluster.
 

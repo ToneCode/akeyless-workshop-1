@@ -262,6 +262,7 @@ resource "aws_iam_policy" "S3-DynamoDB-for-Terraform-Backend" {
       {
         "Effect": "Allow",
         "Action": [
+          "s3:CreateBucket",
           "s3:ListBucket",
           "s3:GetObject",
           "s3:PutObject",
