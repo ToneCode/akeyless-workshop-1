@@ -40,6 +40,8 @@ Click on the `Access Role` tab and click on `admin` and then click on the `Assoc
 
 ### 2.1 Create the Gateway
 
+Run the following commands in the `Terminal` of your GitHub codespace.
+
 ```bash
 docker run -d -p 8000:8000 -p 8200:8200 -p 18888:18888 -p 8080:8080 -p 8081:8081 -p 5696:5696 --name akeyless-gw akeyless/base
 ```
@@ -95,8 +97,8 @@ Now refresh the Akeyless Console browser and click on the `Gateway` tab to see y
 Fill in the API Key values obtained from step 1.1 below and run the commands:
 
 ```bash
-export AKEYLESS_ACCESS_ID=
-export AKEYLESS_ACCESS_KEY=
+export AKEYLESS_ACCESS_ID=xxx
+export AKEYLESS_ACCESS_KEY=xxx
 akeyless configure --profile default --access-id ${AKEYLESS_ACCESS_ID} --access-key ${AKEYLESS_ACCESS_KEY}
 ```
 
@@ -167,7 +169,7 @@ akeyless rotated-secret create aws \
 --rotation-hour 10
 ```
 
-Check the UI to see the configuration there.
+Check the Akeyless UI to see the configuration there. Go to `Items` and search for `/Terraform/aws-target-rotated`.
 
 ![alt text](../images/target-rotated.png)
 
