@@ -34,6 +34,13 @@ Add these credentials in the `start.sh` script at the top then run the script:
 ./start.sh
 ```
 
+like this:
+
+```bash
+export AKEYLESS_ACCESS_ID="xxx"
+export AKEYLESS_ACCESS_KEY="xxx"
+```
+
 The script will create your AWS credentials using Akeyless' Dynamic AWS Secrets. It will configure programmatic access (`AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`) by writing to ~/.aws/credentials.
 
 You can also see all the credentials including the ones that allow you to log into the AWS console at `/tmp/aws-credentials` which looks like this:
