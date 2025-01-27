@@ -8,7 +8,7 @@ This folder is used to create an S3 backend with DynamoDB for Terraform remote s
 2. Once everything is set-up, you add the backend S3 block as shown below:
 ```hcl
   backend "s3" {
-    bucket         = "terraform-state-backend-prod-mueller"
+    bucket         = "terraform-state-backend-prod"
     key            = "mainstate/terraform.tfstate"
     region         = "us-east-1"
     encrypt        = true
